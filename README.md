@@ -203,5 +203,5 @@ PropertyTransferModule: pallet_property::{Pallet, Call, Storage, Event<T>},
 ```
 ### You can test all functions of Property transfter with Polkadot JS
 
-After executing `node-template --dev`, Use this link to open the Polkadot JS Apps UI `https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944`
+After executing `node-template --dev`, Use this link to open the [Polkadot JS Apps UI](https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944)
   
