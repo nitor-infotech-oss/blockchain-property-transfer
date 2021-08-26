@@ -199,7 +199,7 @@ impl pallet_property::Config for Runtime {
 and include it in your `construct_runtime!` macro:
 
 ```rust
-PropertyTransferModule: pallet_property::{Pallet, Call, Storage, Event<T>},
+PropertyModule: pallet_property::{Pallet, Call, Storage, Event<T>},
 ```
 ### You can test all functions of Property transfter with Polkadot JS
 
