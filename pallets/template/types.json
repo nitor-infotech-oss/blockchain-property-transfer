@@ -1,0 +1,10 @@
+{
+    "Property": {
+        "id": "u32",
+        "name": "Vec<u8>",
+        "area": "Vec<u8>",
+        "prop_owner": "AccountId",
+        "value": "Vec<u8>"
+        
+    }
+}

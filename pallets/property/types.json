@@ -1,0 +1,12 @@
+{
+    
+      "Property": {
+        "id": "u64",
+        "name": "Vec<u8>",
+        "area": "Vec<u8>",
+        "value": "Vec<u8>"
+      }
+    
+
+  }
+  
