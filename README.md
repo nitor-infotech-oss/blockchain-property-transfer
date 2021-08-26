@@ -1,4 +1,6 @@
-# Substrate Node Template
+# Property Transfter implemented in Substrate
+Here with the help of substrate we create a pallet that is used to perform transfering ownership of property from one person to another.
+## Install substrate 
 
 A fresh FRAME-based [Substrate](https://www.substrate.io/) node, ready for hacking :rocket:
 
@@ -62,12 +64,8 @@ Start the development chain with detailed logging:
 RUST_LOG=debug RUST_BACKTRACE=1 ./target/release/node-template -lruntime=debug --dev
 ```
 
-### Multi-Node Local Testnet
 
-If you want to see the multi-node consensus algorithm in action, refer to
-[our Start a Private Network tutorial](https://substrate.dev/docs/en/tutorials/start-a-private-network/).
-
-## Template Structure
+## Directory Structure
 
 A Substrate project such as this consists of a number of components that are spread across a few
 directories.
@@ -158,28 +156,52 @@ A FRAME pallet is compromised of a number of blockchain primitives:
 -   Config: The `Config` configuration interface is used to define the types and parameters upon
     which a FRAME pallet depends.
 
-### Run in Docker
+### Traits
 
-First, install [Docker](https://docs.docker.com/get-docker/) and
-[Docker Compose](https://docs.docker.com/compose/install/).
-
-Then run the following command to start a single node development chain.
-
-```bash
-./scripts/docker_run.sh
+This pallet depends on on the [FRAME EnsureOrigin System trait]
+```
+frame_support::traits::EnsureOrigin;
 ```
 
-This command will firstly compile your code, and then start a local development network. You can
-also replace the default command (`cargo build --release && ./target/release/node-template --dev --ws-external`)
-by appending your own. A few useful ones are as follow.
 
-```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
+## How to use in your runtime
 
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
+### Runtime `Cargo.toml`
 
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
+To add this pallet to your runtime, simply include the following to your runtime's `Cargo.toml` file:
+
+```TOML
+[dependencies.pallet-property]
+default-features = false
+path = '../pallets/property'
+version = '3.0.0'
 ```
+
+and update your runtime's `std` feature to include this pallet:
+
+```TOML
+std = [
+    # --snip--
+    'pallet-property/std',
+]
+```
+
+### Runtime `lib.rs`
+
+You should implement it's trait like so:
+
+```rust
+impl pallet_property::Config for Runtime {
+	type Event = Event;
+}
+```
+
+and include it in your `construct_runtime!` macro:
+
+```rust
+PropertyTransferModule: pallet_property::{Pallet, Call, Storage, Event<T>},
+```
+### You can test all functions of Property transfter with Polkadot JS
+
+After executing `node-template --dev`, Use this link to open the Polkadot JS Apps UI `https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944`
+  
